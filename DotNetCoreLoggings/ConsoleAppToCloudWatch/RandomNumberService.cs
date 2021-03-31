@@ -33,6 +33,8 @@ namespace ConsoleAppToCloudWatch
                     Name = $"logger{i + 1}"
                 };
                 _logger.LogInformation("Generated random value {log}", JsonSerializer.Serialize(log));
+
+                //{$.Name = logger * && $.Number > 70}
             }
         }
     }
