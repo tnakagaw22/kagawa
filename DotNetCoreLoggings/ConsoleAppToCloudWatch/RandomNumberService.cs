@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace ConsoleAppToCloudWatch
 {
@@ -22,9 +23,16 @@ namespace ConsoleAppToCloudWatch
 
         public void LogNumbers()
         {
+            _logger.LogInformation("Start generating numbers");
+
             for (int i = 0; i < _config.GetValue<int>("LoopTimes"); i++)
             {
-                _logger.LogInformation($"Generated number {_rand.Next(1, 100)}");
+                var log = new
+                {
+                    Number = _rand.Next(1, 100),
+                    Name = $"logger{i + 1}"
+                };
+                _logger.LogInformation("Generated random value {log}", JsonSerializer.Serialize(log));
             }
         }
     }
